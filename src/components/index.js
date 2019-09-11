@@ -1,5 +1,4 @@
 export { default as AccessButton } from './access_button/AccessButton.component';
-export { default as AuthRoute } from './auth_route/AuthRoute.component';
 export { default as Modal } from './modal/Modal.component';
 export { default as NavBar } from './nav_bar/NavBar.component';
 export { default as SectionWrapper } from './section_wrapper/SectionWrapper.component';
