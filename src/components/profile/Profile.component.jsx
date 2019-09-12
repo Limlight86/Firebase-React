@@ -2,12 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 
 export default ({
-  profile,
-  profile: { uid, displayName, tagline, photoURL, occupation } = {},
+  profile = {},
   selectedProfile,
   handleProfileClick,
   handleViewProfile
 }) => {
+  const { uid, displayName, tagline, photoURL, occupation } = profile;
   const isSelected = uid === selectedProfile.uid;
   return (
     <div className={classNames('profile', { 'selected-profile': isSelected })} onClick={handleProfileClick(profile)}>
