@@ -8,14 +8,12 @@ export const schema = {
       type: 'text',
       id: 'email',
       placeholder: 'email',
-      widget: 'input'
     },
     {
       label: 'Password',
       type: 'password',
       id: 'password',
       placeholder: 'password',
-      widget: 'input'
     }
   ]
 };

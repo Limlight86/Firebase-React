@@ -9,7 +9,6 @@ export const schema = {
       id: 'name',
       placeholder: 'full name',
       required: true,
-      widget: 'input'
     },
     {
       label: 'Display Name',
@@ -17,7 +16,6 @@ export const schema = {
       id: 'displayName',
       placeholder: 'Display Name',
       required: true,
-      widget: 'input'
     },
     {
       label: 'Tag Line',
@@ -25,7 +23,6 @@ export const schema = {
       id: 'tagline',
       placeholder: 'Tag Line',
       required: true,
-      widget: 'input'
     },
     {
       label: 'Occupation',
@@ -33,7 +30,6 @@ export const schema = {
       id: 'occupation',
       placeholder: 'Occupation',
       required: true,
-      widget: 'input'
     },
     {
       label: 'Email',
@@ -41,21 +37,18 @@ export const schema = {
       id: 'email',
       placeholder: 'name@email.com',
       required: true,
-      widget: 'input'
     },
     {
       label: 'Password',
       type: 'password',
       id: 'password',
       required: true,
-      widget: 'input'
     },
     {
       label: 'Confirm Password',
       type: 'password',
       id: 'passwordConfirmation',
       required: true,
-      widget: 'input'
     }
   ]
 };
