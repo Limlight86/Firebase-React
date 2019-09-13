@@ -4,7 +4,7 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 import { isLoggedIn } from '../../helpers';
 
 const AccessButton = _ => {
-  // const { unauthenticateUser } = useContext(GlobalContext);
+  // const { clearSession } = useContext(GlobalContext);
   return isLoggedIn() ? (
     <Link to="/" onClick={_ => console.log('handling logout')}>
       Logout
