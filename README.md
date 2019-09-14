@@ -6,7 +6,9 @@ Firebase is a frontend focused datastore that exists out in the cloud and your c
 
 #### Important Reading Material
 
-https://firebase.google.com/docs/database/web/structure-data?authuser=0
+- Data Structuring - https://firebase.google.com/docs/database/web/structure-data?authuser=0
+- Reading / Writing - https://firebase.google.com/docs/database/web/read-and-write?authuser=0
+- Working with Collections - https://firebase.google.com/docs/database/web/lists-of-data?authuser=0
 
 #### Pros and Cons
 
