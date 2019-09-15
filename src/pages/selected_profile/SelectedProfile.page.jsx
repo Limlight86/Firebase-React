@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { withRouter } from "react-router-dom";
 import { database } from "../../firebase";
 import { GlobalContext } from "../../context";
@@ -33,6 +33,13 @@ const SelectedProfile = ({ match }) => {
     })
   }
 
+  const fetchAndSubscribeToData = () =>{
+    fetchSelectedProfile();
+    subscribeComments()
+  }
+  
+  const mountEffect = useCallback(fetchAndSubscribeToData, []);
+
   const handleSubmit = (comment) => {
     const newCommentRef = database.ref(ref).push();
     const createdAt = new Date().toDateString();
@@ -41,9 +48,8 @@ const SelectedProfile = ({ match }) => {
   }
 
   useEffect(()=>{
-    fetchSelectedProfile();
-    subscribeComments();
-  }, [])
+    mountEffect()
+  }, [mountEffect])
 
   return(
     <SectionWrapper>
