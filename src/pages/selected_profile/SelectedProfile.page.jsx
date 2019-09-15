@@ -7,7 +7,10 @@ import { SectionWrapper, ProfileContent, Comments } from "../../components";
 const SelectedProfile = ({ match }) => {
   const [selectedProfile, setSeletectedProfile] = useState(null);
   const [comments, setComments] = useState([])
+  const {globalState} = useContext(GlobalContext)
+  const {currentUserProfile = {}} = globalState
   const { profileId } = match.params || {};
+  const ref = `/comments/${profileId}`
   const fetchSelectedProfile = () => {
     database
     .ref('/profiles')
@@ -22,12 +25,19 @@ const SelectedProfile = ({ match }) => {
 
   const subscribeComments = () => {
     database
-    .ref(`/comments/${profileId}`)
+    .ref(ref)
     .on('value', snapshot => {
       const comments = snapshot.val() || {}
       const parsedComments = Object.values(comments)
       setComments(parsedComments)
     })
+  }
+
+  const handleSubmit = (comment) => {
+    const newCommentRef = database.ref(ref).push();
+    const createdAt = new Date().toDateString();
+    const newComment = {comment, author: currentUserProfile.displayName, createdAt, id:newCommentRef.key}
+    newCommentRef.set(newComment)
   }
 
   useEffect(()=>{
@@ -40,7 +50,7 @@ const SelectedProfile = ({ match }) => {
       {selectedProfile && <ProfileContent {...selectedProfile} /> }
       <div className='comments-container'>
         <h3>Comments</h3>
-        <Comments comments={comments} handleSubmit={()=> console.log('adding a comment')} />
+        <Comments comments={comments} handleSubmit={handleSubmit} />
       </div>
     </SectionWrapper>
   ) 
