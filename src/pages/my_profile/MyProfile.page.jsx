@@ -1,8 +1,14 @@
-import React from 'react';
-import { SectionWrapper } from '../../components';
+import React, { useContext } from "react";
+import {GlobalContext} from "../../context";
+import { SectionWrapper, ProfileContent } from "../../components";
 
-export default _ => (
-  <SectionWrapper>
-      My Profile page
-  </SectionWrapper>
-);
+export default _ => {
+  const { globalState = {} } = useContext(GlobalContext);
+  const { currentUserProfile } = globalState
+
+  return(
+    <SectionWrapper>
+      <ProfileContent {...currentUserProfile} />
+    </SectionWrapper>
+  ) 
+};
