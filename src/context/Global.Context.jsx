@@ -1,36 +1,44 @@
-import React, { createContext, useReducer, useEffect, useCallback } from 'react';
-import { auth, database } from '../firebase';
-import { getCurrentUser } from '../helpers';
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  useCallback
+} from "react";
+import { auth, database } from "../firebase";
+import { getCurrentUser } from "../helpers";
 
 export const GlobalContext = createContext({});
 
 const INITIAL_STATE = {
   currentUser: {},
-  currentUserProfile: {},
-}
+  currentUserProfile: {}
+};
 
 export const GlobalContextProvider = ({ children }) => {
   const globalContextReducer = (state, payload) => ({ ...state, ...payload });
-  const [globalState, setGlobalState] = useReducer(globalContextReducer, INITIAL_STATE);
+  const [globalState, setGlobalState] = useReducer(
+    globalContextReducer,
+    INITIAL_STATE
+  );
   const createSession = async _ => {
     const { currentUser = {}, token } = (await getCurrentUser()) || {};
     if (!currentUser.uid) return;
-    sessionStorage.setItem('Auth', token);
+    sessionStorage.setItem("Auth", token);
     database
-      .ref('/profiles')
-      .orderByChild('uid')
+      .ref("/profiles")
+      .orderByChild("uid")
       .equalTo(currentUser.uid)
-      .once('value', snapshot => {
-        const profile = snapshot.val();
+      .once("value", snapshot => {
+        const profile = snapshot.val() || {};
         const currentUserProfile = Object.values(profile)[0] || {};
         setGlobalState({ currentUser, currentUserProfile });
       });
   };
   const clearSession = async _ => {
     await auth.signOut();
-    sessionStorage.removeItem('Auth');
+    sessionStorage.removeItem("Auth");
     setGlobalState({ currentUser: {}, currentUserProfile: {} });
-  }
+  };
   const mountEffect = useCallback(createSession, []);
   useEffect(
     _ => {
@@ -39,6 +47,10 @@ export const GlobalContextProvider = ({ children }) => {
     [mountEffect]
   );
   return (
-    <GlobalContext.Provider value={{ globalState, setGlobalState, createSession, clearSession }}>{children}</GlobalContext.Provider>
+    <GlobalContext.Provider
+      value={{ globalState, setGlobalState, createSession, clearSession }}
+    >
+      {children}
+    </GlobalContext.Provider>
   );
 };
