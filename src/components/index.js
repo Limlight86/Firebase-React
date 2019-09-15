@@ -7,3 +7,4 @@ export { default as Profile } from './profile/Profile.component';
 export { default as ProfileContent } from './profile_content/ProfileContent.component';
 export { default as Comments } from './comments/Comments.component';
 export { default as Loader } from './loader/Loader.component';
+export { default as AuthRoute } from './auth_route/AuthRoute.component';

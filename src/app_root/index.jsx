@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { GlobalContextProvider, ModalContextProvider } from '../context';
 import { Home, Login, MyProfile, Register, Error as ErrorPage, Profiles, SelectedProfile } from '../pages';
-import { NavBar, Modal } from '../components';
+import { NavBar, Modal, AuthRoute } from '../components';
 
 export default _ => (
   <Router>
@@ -16,9 +16,9 @@ export default _ => (
         </ModalContextProvider>
         <Route exact path="/" component={Home} />
         <Route exact path="/error" component={ErrorPage} />
-        <Route exact path="/my-profile" component={MyProfile} />
-        <Route exact path="/profiles" component={Profiles} />
-        <Route exact path="/selected-profile/:profileId" component={SelectedProfile} />
+        <AuthRoute exact path="/my-profile" component={MyProfile} />
+        <AuthRoute exact path="/profiles" component={Profiles} />
+        <AuthRoute exact path="/selected-profile/:profileId" component={SelectedProfile} />
       </GlobalContextProvider>
     </div>
   </Router>
