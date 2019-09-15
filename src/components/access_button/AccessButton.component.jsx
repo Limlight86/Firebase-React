@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
-import { Link, NavLink, withRouter } from 'react-router-dom';
-// import { GlobalContext } from '../../context';
-import { isLoggedIn } from '../../helpers';
+import React, { useContext } from "react";
+import { Link, NavLink, withRouter } from "react-router-dom";
+import { GlobalContext } from "../../context";
+import { isLoggedIn } from "../../helpers";
 
 const AccessButton = _ => {
-  // const { clearSession } = useContext(GlobalContext);
+  const { clearSession } = useContext(GlobalContext);
   return isLoggedIn() ? (
-    <Link to="/" onClick={_ => console.log('handling logout')}>
+    <Link to="/" onClick={clearSession}>
       Logout
     </Link>
   ) : (
