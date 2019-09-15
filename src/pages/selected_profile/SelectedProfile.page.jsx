@@ -6,6 +6,7 @@ import { SectionWrapper, ProfileContent, Comments } from "../../components";
 
 const SelectedProfile = ({ match }) => {
   const [selectedProfile, setSeletectedProfile] = useState(null);
+  const [comments, setComments] = useState([])
   const { profileId } = match.params || {};
   const fetchSelectedProfile = () => {
     database
@@ -19,14 +20,28 @@ const SelectedProfile = ({ match }) => {
     })
   }
 
+  const subscribeComments = () => {
+    database
+    .ref(`/comments/${profileId}`)
+    .on('value', snapshot => {
+      const comments = snapshot.val() || {}
+      const parsedComments = Object.values(comments)
+      setComments(parsedComments)
+    })
+  }
+
   useEffect(()=>{
-    fetchSelectedProfile()
+    fetchSelectedProfile();
+    subscribeComments();
   }, [])
 
   return(
     <SectionWrapper>
       {selectedProfile && <ProfileContent {...selectedProfile} /> }
-      <Comments />
+      <div className='comments-container'>
+        <h3>Comments</h3>
+        <Comments comments={comments} handleSubmit={()=> console.log('adding a comment')} />
+      </div>
     </SectionWrapper>
   ) 
 };
