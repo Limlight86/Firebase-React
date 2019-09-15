@@ -1,14 +1,14 @@
-// import { auth } from '../firebase';
+import { auth } from '../firebase';
 
-// export const resolveUser = _ =>
-//   new Promise((resolve, reject) => auth.onAuthStateChanged(user => resolve(user), reject));
+export const resolveUser = _ =>
+  new Promise((resolve, reject) => auth.onAuthStateChanged(user => resolve(user), reject));
 
-// export const getCurrentUser = async _ => {
-//   const currentUser = await resolveUser();
-//   if (!currentUser) return {};
-//   const token = await currentUser.getIdToken();
-//   return { token, currentUser };
-// };
+export const getCurrentUser = async _ => {
+  const currentUser = await resolveUser();
+  if (!currentUser) return {};
+  const token = await currentUser.getIdToken();
+  return { token, currentUser };
+};
 
 export const isLoggedIn = _ => !!sessionStorage.getItem('Auth');
 
